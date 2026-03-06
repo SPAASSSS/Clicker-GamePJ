@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8850d6e2b0f02e44b663d14bfb85797, type: 3}
   m_Name: Diamond
   m_EditorClassIdentifier: Assembly-CSharp::FactoryLineConfig
-  oreType: 0
+  oreType: 4
   oreSprite: {fileID: 21300000, guid: c30d4984cfba8894aa707baec56604fb, type: 3}
   startUnlocked: 0
   baseValue: 50
-  unlockCost: 3000
-  autoCost: 50
+  unlockCost: 15000
+  autoCost: 15000
   autoIntervalSeconds: 1
-  upgradeBaseCost: 25
-  upgradeCostMultiplier: 1.2
+  upgradeBaseCost: 500
+  upgradeCostMultiplier: 2

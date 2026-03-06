@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8850d6e2b0f02e44b663d14bfb85797, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: Assembly-CSharp::FactoryLineConfig
-  oreType: 0
+  oreType: 2
   oreSprite: {fileID: 21300000, guid: 48b7e99832ccf67418b5d42842c9018c, type: 3}
   startUnlocked: 0
-  baseValue: 5
+  baseValue: 10
   unlockCost: 800
-  autoCost: 50
+  autoCost: 800
   autoIntervalSeconds: 1
-  upgradeBaseCost: 25
-  upgradeCostMultiplier: 1.2
+  upgradeBaseCost: 100
+  upgradeCostMultiplier: 1.5

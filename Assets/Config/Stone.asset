@@ -20,4 +20,4 @@ MonoBehaviour:
   autoCost: 50
   autoIntervalSeconds: 1
   upgradeBaseCost: 10
-  upgradeCostMultiplier: 1.2
+  upgradeCostMultiplier: 1.1

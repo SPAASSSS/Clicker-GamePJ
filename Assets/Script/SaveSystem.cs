@@ -20,4 +20,10 @@ public static class SaveSystem
         data = JsonUtility.FromJson<SaveData>(json);
         return data != null;
     }
+
+    public static void DeleteSave()
+    {
+        if (File.Exists(PathFile))
+            File.Delete(PathFile);
+    }
 }

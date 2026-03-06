@@ -56,6 +56,7 @@ public class FactoryLine : MonoBehaviour
 
     public void ManualClick()
     {
+        if (GameManager.Instance.IsPaused) return;
         if (!unlocked) return;
 
         SpawnOreVisual();

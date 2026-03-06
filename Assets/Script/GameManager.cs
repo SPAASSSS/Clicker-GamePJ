@@ -28,7 +28,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (lines == null || lines.Length == 0)
+            lines = FindObjectsOfType<FactoryLine>(true);
+
         LoadGameOrNew();
+
+        foreach (var l in lines)
+            l.OnStateChanged += SaveGame;
+
         RefreshMoneyUI();
     }
 
@@ -65,6 +72,7 @@ public class GameManager : MonoBehaviour
             });
         }
 
+        Debug.Log($"Saving... money={money}, lines={lines?.Length}");
         SaveSystem.Save(data);
     }
 
@@ -72,7 +80,6 @@ public class GameManager : MonoBehaviour
     {
         if (!SaveSystem.TryLoad(out var data))
         {
-            // New game
             foreach (var l in lines) l.InitNewGameState();
             money = 0;
             SaveGame();
@@ -81,7 +88,6 @@ public class GameManager : MonoBehaviour
 
         money = data.money;
 
-        // Apply to lines by matching oreType
         foreach (var l in lines)
         {
             var match = data.lines.FirstOrDefault(x => x.oreType == l.config.oreType.ToString());
@@ -110,10 +116,32 @@ public class GameManager : MonoBehaviour
 
     public static string FormatMoney(double v)
     {
-        // simple formatter: 1,234 / 12.3K / 4.56M / 7.89B
         if (v < 1000) return v.ToString("0");
         if (v < 1_000_000) return (v / 1000d).ToString("0.0") + "K";
         if (v < 1_000_000_000) return (v / 1_000_000d).ToString("0.00") + "M";
         return (v / 1_000_000_000d).ToString("0.00") + "B";
+    }
+
+    public bool IsPaused { get; private set; }
+
+    public void SetPaused(bool paused)
+    {
+        IsPaused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+    }
+
+    public void DeleteSaveAndResetProgress()
+    {
+        SaveSystem.DeleteSave();
+
+        money = 0;
+
+        foreach (var l in lines)
+            l.InitNewGameState();
+
+        RefreshMoneyUI();
+        OnMoneyChanged?.Invoke();
+
+        SaveGame();
     }
 }
